@@ -13,14 +13,12 @@
 
 
             addProduct(productData) {
-                // Validation
                 if (!productData.title || !productData.price) {
                     this.showNotification('Title and price are required!', 'error');
                     return false;
                 }
 
                 if (this.currentEditId) {
-                    // Update existing product
                     const index = this.products.findIndex(p => p.id === this.currentEditId);
                     if (index !== -1) {
                         this.products[index] = { ...this.products[index], ...productData };
@@ -31,7 +29,6 @@
                     document.getElementById('formTitle').textContent = '➕ Add New Product';
                     document.getElementById('cancelBtn').style.display = 'none';
                 } else {
-                    // Add new product
                     const newProduct = {
                         id: Date.now(),
                         ...productData,
@@ -193,7 +190,6 @@
                 document.getElementById('productForm').reset();
             }
 
-            // Notification System
 
             showNotification(message, type = 'info') {
                 const notification = document.getElementById('notification');
@@ -205,10 +201,8 @@
                 }, 3000);
             }
 
-            // Event Listeners
 
             setupEventListeners() {
-                // Form submission
                 document.getElementById('productForm').addEventListener('submit', (e) => {
                     e.preventDefault();
                     
@@ -222,12 +216,11 @@
                     this.addProduct(productData);
                 });
 
-                // Cancel edit
                 document.getElementById('cancelBtn').addEventListener('click', () => {
                     this.currentEditId = null;
                     this.clearForm();
                     document.getElementById('submitBtn').textContent = 'Add Product';
-                    document.getElementById('formTitle').textContent = '➕ Add New Product';
+                    document.getElementById('formTitle').textContent = ' Add New Product';
                     document.getElementById('cancelBtn').style.display = 'none';
                     this.showNotification('Edit cancelled', 'info');
                 });
